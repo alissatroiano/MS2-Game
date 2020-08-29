@@ -1,0 +1,13 @@
+body {
+    font-size: 16px;
+           background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+           url('../images/throne2.jpg');
+           background-position: center;
+           background-repeat: no-repeat;
+           background-size: cover;
+           margin: 0 auto;
+           position: relative;
+           height: 100vh;
+}
+
+/* Jumbotron */

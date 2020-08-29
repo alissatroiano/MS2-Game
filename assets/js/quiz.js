@@ -22,11 +22,9 @@ $(document).ready(function() {
             choiceList: [ 
                     "Henry VI of England",
                     "Charles VI of France",
-                    "Ivan the Terrible"  
-            ],
+                    "Ivan the Terrible"],
             answer: 1,
-            image: "assets/images/throne.jpg",
-    
+            image: "assets/images/zones.png",
             answerMessage: "Much like the Mad King, Aerys Targaryen, King Charles VI of France was popular, charming, and successful before he went mad. In his last days, The Mad King wanted to, 'burn them all'. Charles VI became convinced he was made of glass and insisted on wearing iron rods in his clothes to prevent anyone 'breaking' him."
         },
 
@@ -35,8 +33,7 @@ $(document).ready(function() {
             choiceList: [
                 "Windsor Castle, Windsor",
                 "Kilkenny Castle, Ireland",
-                "Doune Castle, Scotland"
-            ],
+                "Doune Castle, Scotland"],
             answer: 2,
             image: "assets/images/throne.jpg",
             answerMessage: "Doune Castle is one of several sites in the UK being transformed into the world of Westeros to celebrate the legacy of the hit HBO series. The medieval stronghold, north of Stirling, was used as a filming location for the pilot episode, doubling as the Stark family home."
@@ -47,10 +44,9 @@ $(document).ready(function() {
             choiceList: [
                 "The Black Dinner of 1440",
                 "The Red Banquet of 1610",
-                "The Black Massacre of 1430"
-            ],
+                "The Black Massacre of 1430"],
             answer: 0,
-            img: "",
+            image: "",
             answerMessage: "Author George R.R. Martin has said that the inspiration for the famously horrific, Red Wedding, came from Scotland's Black Dinner of 1440, where the teenage Earl, William Douglas, was invited to a dinner with King James. Similar to the demise of Robb Stark, young William his brother were seized, taken from the hall and murdered."
         },
 
@@ -59,10 +55,9 @@ $(document).ready(function() {
             choiceList: [
                 "The Bloodthirsty Thenns",
                 "The Sawney Bean Family",
-                "The Hungry Hungarians"
-            ],
+                "The Hungry Hungarians"],
             answer: 1,
-            img: "",
+            image: "",
             answerMessage: "Much like the cannibal wildlings, The Sawney Bean family were a cave-dwelling, cannibalistic Scottish clan that made a living by hiding in bushes and jumping out on passers-by, hacking them to death, feasting on their flesh, and stealing their possessions.",
         },
 
@@ -71,10 +66,8 @@ $(document).ready(function() {
             choiceList: [
                 "The Great Wall Of China, China",
                 "Hadrian’s Wall, England",
-                "Wall of Babylon, Iraq"
-            ],
+                "Wall of Babylon, Iraq"],
             answer: 1,
-            img: "",
             answerMessage: "In Game of Thrones, the Night's Watch has been guarding, 'The Wall' for centuries. The inspiration for this came from Hadrian's Wall, a historic landmark located between England and Scotland. Built by the invading Roman army 122 AD, Hadrian's wall was meant to be the northern border of the Roman Empire and to keep the ‘barbarians’ out of reach."
         },
 
@@ -83,8 +76,7 @@ $(document).ready(function() {
             choiceList: [
                 "The War of Roses",
                 "The War of Four Kings",
-                "World War I",
-            ],
+                "World War I"],
             answer: 0,
             answerMessage: "The War of Roses was a series of civil wars fought between two prominent families, the House of Lancaster (red rose) and House of York (white rose) for the throne of England."
         },
@@ -94,8 +86,7 @@ $(document).ready(function() {
             choiceList: [
                 "The Great Wall Of China, China",
                 "Hadrian’s Wall, England",
-                "Wall of Babylon, Iraq"
-            ],
+                "Wall of Babylon, Iraq"],
             answer: 1,
             img: "",
             answerMessage: "In Game of Thrones, the Night's Watch has been guarding, 'The Wall' for centuries. The inspiration for this came from Hadrian's Wall, a historic landmark located between England and Scotland. Built by the invading Roman army 122 AD, Hadrian's wall was meant to be the northern border of the Roman Empire and to keep the ‘barbarians’ out of reach."
@@ -106,8 +97,7 @@ $(document).ready(function() {
             choiceList: [
                 "Crete, Greece",
                 "Vis, Croatia",
-                "Dubrovnik, Croatia"
-            ],
+                "Dubrovnik, Croatia"],
             answer: 2,
             answerMessage: "In Game of Thrones, the Night's Watch has been guarding, 'The Wall' for centuries. The inspiration for this came from Hadrian's Wall, a historic landmark located between England and Scotland. Built by the invading Roman army 122 AD, Hadrian's wall was meant to be the northern border of the Roman Empire and to keep the ‘barbarians’ out of reach."
         },
@@ -117,8 +107,7 @@ $(document).ready(function() {
             choiceList: [
                 "The death of Eustace IV, Count of Boulogne - 1153",
                 "The death of Charles II - 1685",
-                "The death of Alexander the Great - 323 BC"
-            ],
+                "The death of Alexander the Great - 323 BC"],
             answer: 0,
             answerMessage: "Author, George R.R. Martin, has revealed that the inspiration for the Purple Wedding came from the death of Eustace IV, Count of Boulogne. King Stephen of England, Eustace's father, had usurped the crown from his cousin, Empress Matilda, leading to the Anarchy."
         },
@@ -129,8 +118,7 @@ $(document).ready(function() {
             choiceList: [
                 "Gardens of Versailles - Versailles, France",
                 "Alcázar of Seville - Seville, Spain",
-                "Powerscourt Gardens - Enniskerry, County Wicklow, Ireland"
-            ],
+                "Powerscourt Gardens - Enniskerry, County Wicklow, Ireland"],
             answer: 1,
             answerMessage: "In Game of Thrones, "
         },
@@ -140,11 +128,11 @@ $(document).ready(function() {
             choiceList: [
                 "Henry VI of England",
                 "Edward I of England",
-                "Peter the Great"
-            ],
+                "Peter the Great"],
             answer: 1,
             answerMessage: ".......explanation goes here"
         },
+
     ];
     // end questions array
 
@@ -181,7 +169,7 @@ $(document).ready(function() {
 
     // Function to display next question
     function newQuestion() {
-        $("#newMessage").empty();
+        $("#message").empty();
         $("#correctedAnswer").empty();
         $("#img").hide();
         $("#imgCaption").hide();
@@ -247,8 +235,8 @@ $(document).ready(function() {
             let rightAnswerIndex = quizQuestions[currentQuestion].answer;
 
         // Add the img/image that corresponds to eachh question
-            let imgImageLink = quizQuestions[currentQuestion].image;
-            var newimg = $("<img>");
+            let newImageLink = quizQuestions[currentQuestion].image;
+            var newImg = $("<img>");
             newImg.attr("src", newImageLink);
             newImg.addClass("newImage");
             $("#img").html(newImg);
@@ -270,7 +258,7 @@ $(document).ready(function() {
             } else {
                 unanswered++;
                 $('#message').html(messages.endTime);
-                $('#correctedAnswer').html('The correct answer was: ' + Zs);
+                $('#correctedAnswer').html('The correct answer was: ' + rightAnswerMessage);
                 answered = true;
             }
 

@@ -140,8 +140,26 @@
             answer: 1,
             answerMessage: ".......explanation goes here"
         },
-
-
     ];
+    // end questions array
+
+    // Create Functions here
+    $("#quizCol").hide();
+
+    // Trigger start on click functionality here
+    $("#startBtn").on("click", function () {
+        $(this).hide();
+        newGame();
+    });
+    
+    // Trigger reset button on click functionality here
+    $("#tryAgainBtn").on("click", function () {
+        $(this).hide();
+        newGame();
+    });
+
+
+
+
 
 });

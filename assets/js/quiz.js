@@ -1,14 +1,18 @@
-!(document).readyState(function() {
+$(document).ready(function() {
     // Define variables here
-    let newQuestion;
+    let currenQuestion;
     let correctAnswer;
     let incorrectAnswer;
-    let incompleteQuestions;
+    let incomplete;
+    let seconds;
+    let time;
     let answered;
     let userSelect;
     let messages = {
         correct: "Excellent choice, Your Grace! That is correct",
-        incorrect: "I'm sorry, My Lord. That is not the right choice"
+        incorrect: "I'm sorry, My Lord. That is not the right choice",
+        endTime: "Looks like you ran out of time!" + "<br>" + "But... It's never too late, it's never too late for now!",
+        finished: "So, how'd you do?"
     };
 
     // Create an array of objects for multiple choice questions here
@@ -21,6 +25,7 @@
                     "Ivan the Terrible"  
             ],
             answer: 1,
+            image: "assets/images/throne.jpg",
     
             answerMessage: "Much like the Mad King, Aerys Targaryen, King Charles VI of France was popular, charming, and successful before he went mad. In his last days, The Mad King wanted to, 'burn them all'. Charles VI became convinced he was made of glass and insisted on wearing iron rods in his clothes to prevent anyone 'breaking' him."
         },
@@ -33,7 +38,7 @@
                 "Doune Castle, Scotland"
             ],
             answer: 2,
-            map: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2220.3748349009043!2d-4.052140248346791!3d56.185199065932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48888bd24de4fcbf%3A0x5599d30a61b7fb39!2sDoune%20Castle!5e0!3m2!1sen!2sus!4v1598723412732!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>`,
+            image: "assets/images/throne.jpg",
             answerMessage: "Doune Castle is one of several sites in the UK being transformed into the world of Westeros to celebrate the legacy of the hit HBO series. The medieval stronghold, north of Stirling, was used as a filming location for the pilot episode, doubling as the Stark family home."
         },
 
@@ -45,7 +50,7 @@
                 "The Black Massacre of 1430"
             ],
             answer: 0,
-            map: "",
+            img: "",
             answerMessage: "Author George R.R. Martin has said that the inspiration for the famously horrific, Red Wedding, came from Scotland's Black Dinner of 1440, where the teenage Earl, William Douglas, was invited to a dinner with King James. Similar to the demise of Robb Stark, young William his brother were seized, taken from the hall and murdered."
         },
 
@@ -57,7 +62,7 @@
                 "The Hungry Hungarians"
             ],
             answer: 1,
-            map: "",
+            img: "",
             answerMessage: "Much like the cannibal wildlings, The Sawney Bean family were a cave-dwelling, cannibalistic Scottish clan that made a living by hiding in bushes and jumping out on passers-by, hacking them to death, feasting on their flesh, and stealing their possessions.",
         },
 
@@ -69,7 +74,7 @@
                 "Wall of Babylon, Iraq"
             ],
             answer: 1,
-            map: "",
+            img: "",
             answerMessage: "In Game of Thrones, the Night's Watch has been guarding, 'The Wall' for centuries. The inspiration for this came from Hadrian's Wall, a historic landmark located between England and Scotland. Built by the invading Roman army 122 AD, Hadrian's wall was meant to be the northern border of the Roman Empire and to keep the ‘barbarians’ out of reach."
         },
 
@@ -92,7 +97,7 @@
                 "Wall of Babylon, Iraq"
             ],
             answer: 1,
-            map: "",
+            img: "",
             answerMessage: "In Game of Thrones, the Night's Watch has been guarding, 'The Wall' for centuries. The inspiration for this came from Hadrian's Wall, a historic landmark located between England and Scotland. Built by the invading Roman army 122 AD, Hadrian's wall was meant to be the northern border of the Roman Empire and to keep the ‘barbarians’ out of reach."
         },
 
@@ -149,17 +154,148 @@
     // Trigger start on click functionality here
     $("#startBtn").on("click", function () {
         $(this).hide();
-        newGame();
+        newQuiz();
     });
     
     // Trigger reset button on click functionality here
     $("#tryAgainBtn").on("click", function () {
         $(this).hide();
-        newGame();
+        newQuiz();
     });
 
+    // Trigger a new quiz
+    function newQuiz() {
+        $("#quizCol").show();
+        $("#newMessage").empty();
+        $("#correctAnswers").empty();
+        $("#incorrectAnswers").empty();
+        $("#incomplete").empty();
+        $("#img").hide();
+        $("#imgCaption").hide();
+        currentQuestion = 0;
+        correctAnswer = 0;
+        incorrectAnswer = 0;
+        incomplete = 0;
+        newQuestion();
+    }
+
+    // Function to display next question
+    function newQuestion() {
+        $("#newMessage").empty();
+        $("#correctedAnswer").empty();
+        $("#img").hide();
+        $("#imgCaption").hide();
+        answered = true;
+
+        $("#currentQuestion").html("Question " + (currentQuestion + 1) + " of " + quizQuestions.length);
+        $(".question").html(quizQuestions[currentQuestion].question);
+
+        // Create a for loop to display a list of choices for user to select
+        for (let i = 0; i <= 5; i++) {
+            let choices = $("<div>");
+            choices.text(quizQuestions[currentQuestion].choiceList[i]);
+            choices.attr({ "data-index": i });
+            choices.addClass("thisChoice");
+            $(".choiceList").append(choices);
+        }
+
+        countdown();
+
+        //When user clicks on n answer this will pause the time and display the correct answer to the question 
+        $(".thisChoice").on("click", function () {
+            userSelect = $(this).data("index");
+            clearInterval(time);
+            answerPage();
+        });
+    }
+
+    function countdown() {
+        seconds = 15;
+        $("#timeLeft").html("00:" + seconds);
+        answered = true;
+        //Sets a delay of one second before the timer starts
+        time = setInterval(showCountdown, 1000);
+    }
 
 
+    //This function displays the countdown
+    function showCountdown() {
+        seconds--;
 
+        if (seconds < 10) {
+            $("#timeLeft").html("00:0" + seconds);
+        } else {
+            $("#timeLeft").html("00:" + seconds);
+        }
 
+        if (seconds < 1) {
+            clearInterval(time);
+            answered = false;
+            answerPage();
+        }
+    }
+
+        // Set up the explanation to answers page
+        function answerPage() {
+            $("#currentQuestion").empty();
+            $(".thisChoice").empty(); //Clears question page
+            $(".question").empty();
+            $("#img").show();
+            $("#imgCaption").show();
+
+            let rightAnswerMessage = quizQuestions[currentQuestion].choiceList[quizQuestions[currentQuestion].answer];
+            let rightAnswerIndex = quizQuestions[currentQuestion].answer;
+
+        // Add the img/image that corresponds to eachh question
+            let imgImageLink = quizQuestions[currentQuestion].image;
+            var newimg = $("<img>");
+            newImg.attr("src", newImageLink);
+            newImg.addClass("newImage");
+            $("#img").html(newImg);
+            
+            // Add captions below each img/image to explain correct answer
+            let imgCaption = quizQuestions[currenQuestion].answerMessage;
+            newCaption = $("<div>");
+            newCaption.html(imgCaption);
+            newCaption.addClass("imgCaption");
+            $("#imgCaption").html(newCaption);
+
+            if ((userSelect == rightAnswerIndex) && (answered === true)) {
+                correctAnswer++;
+                $('#message').html(messages.correct);
+            } else if ((userSelect != rightAnswerIndex) && (answered === true)) {
+                incorrectAnswer++;
+                $('#message').html(messages.incorrect);
+                $('#correctedAnswer').html('The correct answer was: ' + rightAnswerMessage);
+            } else {
+                unanswered++;
+                $('#message').html(messages.endTime);
+                $('#correctedAnswer').html('The correct answer was: ' + Zs);
+                answered = true;
+            }
+
+            if (currentQuestion == (quizQuestions.length - 1)) {
+                setTimeout(scoreboard, 6000);
+            } else {
+                currentQuestion++;
+                setTimeout(newQuestion, 6000);
+            }
+        }
+
+        //This fucntion displays all the game stats
+        function scoreboard() {
+            $('#timeLeft').empty();
+            $('#message').empty();
+            $('#correctedAnswer').empty();
+            $('#img').hide();
+            $("#imgCaption").hide();
+
+            $('#newMessage').html(messages.finished);
+            $('#correctAnswers').html("Correct Answers: " + correctAnswer);
+            $('#incorrectAnswers').html("Incorrect Answers: " + incorrectAnswer);
+            $('#incomplete').html("Unanswered: " + incomplete);
+            $('#tryAgainBtn').addClass('reset');
+            $('#tryAgainBtn').show();
+            $('#tryAgainBtn').html("TRY AGAIN!");
+        }
 });

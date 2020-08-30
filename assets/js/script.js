@@ -1,34 +1,49 @@
-// Begin Script //
-$(document).ready(function(){
+/* 
+GAME STRUCTURE:
+===============
+01. The game starts when the player hits the START button.
+02. Once the game starts the is a clock countdown.
+03. The time given is the total time to finish the whole game.
+04. The game ends if the time runs out, Game Over.
+05. The player can only guess one answer per question.
+06. Include the timer so the player can see it.
+07. All the questions are displayed at once.
+08. There is a DONE button at the end, if the user is finished before the timer stops.
+*/
 
-// Define letiables here
-	let currentQuestion; 
-	let correctAnswer; 
-	let incorrectAnswer; 
-	let unanswered; 
-	let seconds; 
-	let time; 
-	let answered; 
-	let userSelect;
-	let messages = {
-		correct: "'That's what I do. I drink and I know things'",
-		incorrect: "'You know nothing, Jon Snow.'",
-		endTime: "'Nothing f*** s you harder than time'",
-		finished: "When you play the game of thrones, you win or you die. You survived"
-	};
+//IMPORTANT!
+$(document).ready(function () {
 
-	const submitButton = document.getElementById('submit');
+    // GLOBAL letIABLES
+    // ================
 
-	//All questions inside an array of objects
+    //Define all global letiables and objects
+    let currentQuestion;
+    let correctAnswer;
+    let incorrectAnswer;
+    let unanswered;
+    let seconds;
+    let time;
+    let answered;
+    let userSelect;
+    let messages = {
+        correct: "'That's what I do. I drink and I know things'",
+        incorrect: "'You know nothing, Jon Snow.'",
+        endTime: "'Nothing f*** s you harder than time'",
+        finished: "When you play the game of thrones, you win or you die. You survived"
+    };
+
+    const submitButton = document.getElementById('submit');
+
+    //All questions inside an array of objects
     let triviaQuestions = [
         {
             question: "Who was the, 'Mad King' (Aerys Targaryen) inspired by?",
-            answerList: [ 
-                    "Henry VI of England",
-                    "Charles VI of France",
-                    "Ivan the Terrible"],
+            answerList: [
+                "Henry VI of England",
+                "Charles VI of France",
+                "Ivan the Terrible"],
             answer: 1,
-            image: "assets/images/zones.png",
             answerText: "Much like the Mad King, Aerys Targaryen, King Charles VI of France was popular, charming, and successful before he went mad. In his last days, The Mad King wanted to, 'burn them all'. Charles VI became convinced he was made of glass and insisted on wearing iron rods in his clothes to prevent anyone 'breaking' him."
         },
 
@@ -39,7 +54,6 @@ $(document).ready(function(){
                 "Kilkenny Castle, Ireland",
                 "Doune Castle, Scotland"],
             answer: 2,
-            image: "assets/images/zones.png",
             answerText: "Doune Castle is one of several sites in the UK being transformed into the world of Westeros to celebrate the legacy of the hit HBO series. The medieval stronghold, north of Stirling, was used as a filming location for the pilot episode, doubling as the Stark family home."
         },
 
@@ -50,8 +64,7 @@ $(document).ready(function(){
                 "The Red Banquet of 1610",
                 "The Black Massacre of 1430"],
             answer: 0,
-            image: "",
-            answerText: "Author George R.R. Martin has said that the inspiration for the famously horrific, Red Wedding, came from Scotland's Black Dinner of 1440, where the teenage Earl, William Douglas, was invited to a dinner with King James. Similar to the demise of Robb Stark, young William his brother were seized, taken from the hall and murdered."
+                answerText: "Author George R.R. Martin has said that the inspiration for the famously horrific, Red Wedding, came from Scotland's Black Dinner of 1440, where the teenage Earl, William Douglas, was invited to a dinner with King James. Similar to the demise of Robb Stark, young William his brother were seized, taken from the hall and murdered."
         },
 
         {
@@ -140,4 +153,168 @@ $(document).ready(function(){
 
     ];
 
-});
+
+    // FUNCTIONS
+    // =========
+
+    //This hides the game area on page load
+    $("#gameCol").hide();
+
+    //This captures user click on start button to create a new game
+    $("#startBtn").on("click", function () {
+        $(this).hide();
+        newGame();
+    });
+
+    //This captures the user's click on the reset button to create a new game
+    $("#startOverBtn").on("click", function () {
+        $(this).hide();
+        newGame();
+    });
+
+    //This function sets up the page for a new game emptying all areas and showing game area
+    function newGame() {
+        $("#gameCol").show();
+        $("#finalMessage").empty();
+        $("#correctAnswers").empty();
+        $("#incorrectAnswers").empty();
+        $("#unanswered").empty();
+        $("#img").hide();
+        $("#imgCaption").hide();
+        currentQuestion = 0;
+        correctAnswer = 0;
+        incorrectAnswer = 0;
+        unanswered = 0;
+        newQuestion();
+    }
+
+    //This function displays the next question
+    function newQuestion() {
+        $("#message").empty();
+        $("#correctedAnswer").empty();
+        $("#map").hide();
+        $("#mapCaption").hide();
+        answered = true;
+
+        //This function displays the new question
+        $("#currentQuestion").html("Question " + (currentQuestion + 1) + " of " + triviaQuestions.length);
+        $(".question").html(triviaQuestions[currentQuestion].question);
+
+        //This function displays the new questions's answer options in multiple choice type
+        for (let i = 0; i <= 5; i++) {
+
+            let choices = $("<div>");
+            choices.text(triviaQuestions[currentQuestion].answerList[i]);
+            choices.attr({ "data-index": i });
+            choices.addClass("thisChoice");
+            $(".answerList").append(choices);
+        }
+
+        //This sets the timer
+        countdown();
+
+        //When user clicks on n answer this will pause the time and display the correct answer to the question 
+        $(".thisChoice").on("click", function () {
+            userSelect = $(this).data("index");
+            clearInterval(time);
+            answerPage();
+        });
+    }
+
+    //This function is for the timer countdown
+    function countdown() {
+        seconds = 15;
+        $("#timeLeft").html("00:" + seconds);
+        answered = true;
+        //Sets a delay of one second before the timer starts
+        time = setInterval(showCountdown, 1000);
+    }
+
+    //This function displays the countdown
+    function showCountdown() {
+        seconds--;
+
+        if (seconds < 10) {
+            $("#timeLeft").html("00:0" + seconds);
+        } else {
+            $("#timeLeft").html("00:" + seconds);
+        }
+
+        if (seconds < 1) {
+            clearInterval(time);
+            answered = false;
+            answerPage();
+        }
+    }
+
+    //This function takes the user to the answer page after the user selects an answer or timer runs out
+    function answerPage() {
+        $("#currentQuestion").empty();
+        $(".thisChoice").empty(); //Clears question page
+        $(".question").empty();
+        $("#img").show();
+        $("#mapCaption").show();
+
+        let rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
+        let rightAnswerIndex = triviaQuestions[currentQuestion].answer;
+
+        //This adds the map that corresponds to this quesiton
+        let mapImageLink = triviaQuestions[currentQuestion].image;
+        let newMap = $("<img>");
+        newMap.attr("src", mapImageLink);
+        newMap.addClass("mapImg");
+        $("#map").html(newMap);
+
+        //STILL TO DO
+        //This adds a line of text below the map that talks about why the answer is correct.
+        let mapCaption = triviaQuestions[currentQuestion].answerText;
+        newCaption = $("<div>");
+        newCaption.html(mapCaption);
+        newCaption.addClass("mapCaption");
+        $("#mapCaption").html(newCaption);
+
+        //This checks to see if user choice is correct, incorrect, or unanswered
+        if ((userSelect == rightAnswerIndex) && (answered === true)) {
+            correctAnswer++;
+            $('#message').html(messages.correct);
+        } else if ((userSelect != rightAnswerIndex) && (answered === true)) {
+            incorrectAnswer++;
+            $('#message').html(messages.incorrect);
+            $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+        } else {
+            unanswered++;
+            $('#message').html(messages.endTime);
+            $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+            answered = true;
+        }
+
+        if (currentQuestion == (triviaQuestions.length - 1)) {
+            setTimeout(scoreboard, 6000);
+        } else {
+            currentQuestion++;
+            setTimeout(newQuestion, 6000);
+        }
+    }
+
+    //This function displays all the game stats
+    function scoreboard() {
+        $('#timeLeft').empty();
+        $('#message').empty();
+        $('#correctedAnswer').empty();
+        $('#map').hide();
+        $("#mapCaption").hide();
+
+        $('#finalMessage').html(messages.finished);
+        $('#correctAnswers').html("Correct Answers: " + correctAnswer);
+        $('#incorrectAnswers').html("Incorrect Answers: " + incorrectAnswer);
+        $('#unanswered').html("Unanswered: " + unanswered);
+        $('#startOverBtn').addClass('reset');
+        $('#startOverBtn').show();
+        $('#startOverBtn').html("PLAY AGAIN");
+    }
+
+
+    // MAIN PROCESS
+    //=============
+
+}); //IMPORTANT!

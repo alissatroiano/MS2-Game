@@ -1,74 +1,121 @@
-/*-------------------------- Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
-
+/* Layout and Grid */
 body {
-    font-size: 16px;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.75)), url('../images/throne2.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0 auto;
-    position: relative;
-    height: 100vh;
+    background-color: #000000;
     font-family: 'Trajan-Pro-3',
         serif;
-
+    font-size: 16px;
 }
+
 
 /* Titles, subtitles and special text */
-
 h1 {
-    font-family: 'Trajan-Pro-3', serif;
-    color: #fafafa;
-    text-align: center;
-    margin-top: 30px;
+     font-family: 'Trajan-Pro-3', serif;
+     font-size: 4rem;
+     color: #fafafa;
+     text-align: center;
+     padding-top: 190px;
+     text-shadow: 1px 1px 2px #5e0808;
 }
+
+h2.lead {
+      font-family: 'Trajan-Pro-3',
+      serif;
+      font-size: 2.5rem;
+      color: #b00d0d;
+      text-align: center;
+      text-shadow: 1px 1px 2px #5e0808;
+
+      }
 
 /* Jumbotron */
-
-#quizRow {
+.jumbotron {
+    background: linear-gradient(rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.75)),
+        url("../images/throne2.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-size: cover;
+    color: #fafafa;
     text-align: center;
+}
+
+h1, #title {
+    font-family: 'Trajan-Pro-3', serif;
+    font-size: 5.5rem;
+    color: #fafafa;
+    text-align: center;
+    padding-top: 60px;
+    text-shadow: 1px 1px 2px #5e0808;
+}
+
+h2.lead {
+    font-family: 'Trajan-Pro-3',
+        serif;
+    font-size: 3rem;
+    color: #b00d0d;
+    text-align: center;
+    text-shadow: 1px 1px 1px #5e0808;
+
+}
+
+#gameRow {
     text-align: center;
     margin-top: 30px;
 }
 
-#quizCol {
+#gameCol {
     text-align: center;
-    border: 2px solid #ffffac;
+    border: 2px solid #5e0808;
     border-radius: 5px;
     padding: 30px;
     min-height: 300px;
     margin-bottom: 60px;
 }
 
-/*START BUTTON*/
+/* CTA Button */
 #startBtn {
-    background-color: #b00d0d;
+    font-family: 'Trajan-Pro-3', serif;
+    font-size: 1.6rem;
+    background-color: #5e0808;
     color: #fafafa;
-    border: 1px solid #000000;
-    font-size: 200%;
-    letter-spacing: 2px;
-    padding: 20px 50px;
-    margin-top: 30px;
+    border: 1px solid #5e0808;
+    padding: 20px 35px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+
 }
 
 #startBtn:hover {
-    background-color: #5e0808;
+    background-color: #b00d0d;
     color: #fafafa;
-    border: 1px solid #ffffac;
+        font-size: 1.6rem;
+
+    border: 1px solid #b00d0d;
+    font-family: 'Trajan-Pro-3',
+        serif;
+    padding: 20px 35px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
 }
 
 #timeLeft {
     font-size: 300%;
-    color: #ffffac;
+    color: #d7c5c5;
     letter-spacing: 2px;
     font-weight: 500;
 }
 
 #currentQuestion {
-    color: white;
-    text-align: left;
-    font-size: 100%;
+    color: #d7c5c5;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
     text-transform: uppercase;
 }
 
@@ -83,51 +130,59 @@ h1 {
     text-align: center;
     margin-right: 30px;
     margin-left: 30px;
-    color: #ffffac;
-    font-size: 150%;
-    line-height: 2.5;
-    margin-bottom: 30px;
+    color: #fafafa;
+    font-size: 1.5rem;
+    line-height: 2.2;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .thisChoice:hover {
-    background-color: #ffffac;
-    color: black;
+    background-color: #5e0808;
+    color: #fafafa;
 }
 
 
 #message {
     color: white;
+    font-size: 125%;
     margin-bottom: 10px;
 }
 
 #correctedAnswer {
-    color: #ffffac;
+    color: #b00d0d;
     font-size: 100%;
     text-transform: uppercase;
+    margin-bottom: 50px;
 }
 
-#img {
-    margin-bottom: 20px;
-    margin-top: 20px;
+#gif {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    max-width: 100%;
+    height: auto;
 }
 
-.newImg {
+.gifImg {
     max-height: 200px;
     max-width: 320px;
     border: 1px solid #ffffff;
     border-radius: 5px;
 }
 
-#imgCaption {
+#mapCaption {
     color: #fafafa;
-    font-family: 'Trajan-Pro-3', sans-serif;
     font-size: 1.5rem;
+    padding: 10px 10px;
+    text-align: center;
+    margin-top: 20px;
+
 }
 
 .reset {
-    background-color: #ffffac;
-    color: black;
-    border: 1px solid #000000;
+    background-color: #5e0808;
+    color: #fafafa;
+    border: 1px solid #5e0808;
     font-size: 200%;
     letter-spacing: 2px;
     margin-left: 40px;
@@ -139,22 +194,21 @@ h1 {
 
 .reset:hover {
     background-color: black;
-    color: #fafafa;
-    border: 1px solid #fafafa;
+    color: #ffffac;
+    border: 1px solid #ffffac;    
 }
 
-#newMessage {
-    color: #fafafa;
+#finalMessage {
+    color: white;
     font-size: 200%;
     margin-bottom: 30px;
     margin-top: 10px;
 }
 
-#correctAnswers,
-#incorrectAnswers,
-#unanswered {
-    color: #fafafa;
-    font-size: 150%;
+#correctAnswers, #incorrectAnswers, #unanswered {
+    color: #b00d0d;
+    font-size: 1.3rem;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 2;

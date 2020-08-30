@@ -1,96 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Setting the Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Import Adobe Fonts-->
-    <link rel="stylesheet" href="https://use.typekit.net/lnh4tqt.css">
-    <!--Import Font Awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
-        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <!-- Bootstrap 4 CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!--Stylesheet-->
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-    <title>MS2 Game</title>
-</head>  
+            <link rel="stylesheet" href="https://use.typekit.net/lnh4tqt.css">
+
+    <!--Import normalize.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+    <!-- Import Bootstrap CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+	<title>GOT Trivia Game</title>
+	
+</head>
 <body>
-
-<!--Jumbotron Starts Here-->
-<div class="container-fluid">
-    <h1>Game Of Zones</h1>
-    <p></p>
-</div>
-<!--./end-jumbotron-->
-
-<!--Container for Game Goes Here-->
-<div class="container-fluid">
-    <!-- Begin First Row-->
-    <div class="row text-center">
-        <!-- Begin Column 1 -->
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        </div>
-        <!--./end-column-1-->
-    </div>
-    <!--./end-first-row -->
-
-    <!-- Begin Row 2 -->
-    <div class="container-fluid">
-    <div class="row text-center align-items-center" id="startRow">
-        <!--Begin Column 2-->
-        <div class="col-xs-12 col-sm-12" id="startCTA">
-            <!--Start Div-->
-            <div id="startDiv">
-                <div id="start">
-                    <button id="startBtn">Play Now</button>
+ 
+<!-- JUMBOTRON -->
+<div class="jumbotron">
+	<div class="container-fluid">
+		<h1 id="title">Game Of Zones</h1>
+        <h2 class="lead">You Win Or You Die</h2>
+        <div class="row text-center">
+            <div class="col-12">
+                <div id="startDiv">
+                    <div id="start">
+                        <button id="startBtn">Play Game</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!--./end-column-2-->
-    </div>
-    <!--./end-row-2-->
-    </div>
-
-    <!--Begin Row 3-->
-    <div class="row" id="quizRow">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-md-offset-3" id="quizCol">
-
-            <!--When each question is displayed-->
-            <div id="currentQuestion"></div>
-            <div id="timeLeft"></div>
-            <div class="question"></div>
-            <div class="choiceList"></div>
-
-            <!--When each answer is displayed-->
-            <div id="message"></div>
-            <div id="correctedAnswer"></div>
-            <div id="img"></div>
-            <div id="imgCaption"></div>
-
-            <!--When results are displayed-->
-            <div id="newMessage"></div>
-            <div id="correctAnswers"></div>
-            <div id="incorrectAnswers"></div>
-            <div id="incomplete"></div>
-            <div id="tryAgainBtn"></div>
-        </div>
-    </div>
-    <!--./end-row-3-->
+                  
+	</div>
 </div>
-<!--./end-container-->
+<!-- End Jumbotron -->
 
-<!-- Scripts Start Here-->
+<div class="container" id="playGame"> <!-- Begin Container -->
+	<div class="row"> <!-- Begin Row 1 -->
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <!-- Begin Column 1A -->
+		</div> <!-- End Column 1A -->
+	</div> <!-- End Row 1 -->
 
-<!--Add jQuery CDN here-->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<!--./end-jquery-cdn-->
+	<div class="row" id="gameRow"> <!-- Begin Row 2 -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-md-offset-3" id="startCol"> <!-- Begin Column 2A -->
 
-<!--Link to custom JS file here-->
-<script src="assets/js/quiz.js"></script>
-<!--./custom-js-file-->
+		</div> <!-- End Column 2A -->
+	</div> <!-- End Row 2 -->
 
+	<div class="row" id="gameRow"> <!-- Begin Row 3 -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-md-offset-3" id="gameCol"> <!-- Begin Column 3A -->
+
+			<!-- WHEN EACH QUESTION IS DISPLAYED -->
+			<div id="currentQuestion"></div>
+			<div class="question"></div>
+			<div class="buttons">
+			<div class="answerList"></div>
+
+			<!-- WHEN EACH ANSWER IS DISPLAYED -->
+			<div id="message"></div>
+			<div id="correctedAnswer"></div>
+			<div id="map" class="img-fluid"></div>
+			<div id="mapCaption"></div>
+
+			<!-- WHEN RESULTS ARE DISPLAYED -->
+			<div id="finalMessage"></div>
+			<div id="correctAnswers"></div>
+			<div id="incorrectAnswers"></div>
+			<div id="unanswered"></div>
+			<div id="startOverBtn"></div>
+			<div class="buttons">
+				<button id="previous" class="quiz-button btn btn-warning">Previous</button>
+				<button id="next" class="quiz-button btn btn-warning">Next</button>
+				<button type="button" class="quiz-button btn btn-warning" id="submit">Submit Quiz</button>
+			</div>
+
+		</div> <!-- End Column 3A -->
+
+	</div> <!-- End Row 3 -->
+
+	</div>
+
+</div> <!-- End Container -->
+
+<!-- Linking jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+<!-- Linking my own JAVASCRIPT -->
+<script type="text/javascript" src="assets/js/script.js"></script>
 
 </body>
 </html>

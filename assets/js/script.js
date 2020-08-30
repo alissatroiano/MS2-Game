@@ -54,6 +54,7 @@ $(document).ready(function () {
                 "Kilkenny Castle, Ireland",
                 "Doune Castle, Scotland"],
             answer: 2,
+            image: "assets/images/dounecastle.jpg",
             answerText: "Doune Castle is one of several sites in the UK being transformed into the world of Westeros to celebrate the legacy of the hit HBO series. The medieval stronghold, north of Stirling, was used as a filming location for the pilot episode, doubling as the Stark family home."
         },
 
@@ -64,7 +65,7 @@ $(document).ready(function () {
                 "The Red Banquet of 1610",
                 "The Black Massacre of 1430"],
             answer: 0,
-                answerText: "Author George R.R. Martin has said that the inspiration for the famously horrific, Red Wedding, came from Scotland's Black Dinner of 1440, where the teenage Earl, William Douglas, was invited to a dinner with King James. Similar to the demise of Robb Stark, young William his brother were seized, taken from the hall and murdered."
+            answerText: "Author George R.R. Martin has said that the inspiration for the famously horrific, Red Wedding, came from Scotland's Black Dinner of 1440, where the teenage Earl, William Douglas, was invited to a dinner with King James. Similar to the demise of Robb Stark, young William his brother were seized, taken from the hall and murdered."
         },
 
         {
@@ -74,7 +75,7 @@ $(document).ready(function () {
                 "The Sawney Bean Family",
                 "The Hungry Hungarians"],
             answer: 1,
-            images: "",
+            image: "",
             answerText: "Much like the cannibal wildlings, The Sawney Bean family were a cave-dwelling, cannibalistic Scottish clan that made a living by hiding in bushes and jumping out on passers-by, hacking them to death, feasting on their flesh, and stealing their possessions.",
         },
 
@@ -150,14 +151,9 @@ $(document).ready(function () {
             answer: 1,
             answerText: ".......explanation goes here"
         },
-
     ];
 
-
-    // FUNCTIONS
-    // =========
-
-    //This hides the game area on page load
+    // Functions start here
     $("#gameCol").hide();
 
     //This captures user click on start button to create a new game
@@ -252,7 +248,7 @@ $(document).ready(function () {
         $("#currentQuestion").empty();
         $(".thisChoice").empty(); //Clears question page
         $(".question").empty();
-        $("#img").show();
+        $("#map").show();
         $("#mapCaption").show();
 
         let rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
@@ -312,9 +308,4 @@ $(document).ready(function () {
         $('#startOverBtn').show();
         $('#startOverBtn').html("PLAY AGAIN");
     }
-
-
-    // MAIN PROCESS
-    //=============
-
-}); //IMPORTANT!
+});

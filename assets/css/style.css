@@ -1,9 +1,13 @@
 /* Layout and Grid */
 body {
-    background-color: #000000;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.82)), url("../images/throne2.jpg");
     font-family: 'Trajan-Pro-3',
         serif;
     font-size: 16px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 
@@ -29,17 +33,11 @@ h2.lead {
 
 /* Jumbotron */
 .jumbotron {
-    background: linear-gradient(rgba(0, 0, 0, 0.75),
-            rgba(0, 0, 0, 0.75)),
-        url("../images/throne2.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 400px;
     max-width: 100%;
     margin: 0 auto;
-    background-size: cover;
     color: #fafafa;
     text-align: center;
+    background-color: transparent;
 }
 
 h1,
@@ -111,19 +109,20 @@ h2.lead {
 }
 
 #currentQuestion {
-    color: #d7c5c5;
+    color: #fafafa;
+    font-size: 1.5rem;
     text-align: center;
-    font-size: 1.2rem;
     margin-top: 20px;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
 
 .question {
-    color: white;
-    font-size: 200%;
+    color: #fafafa;
+    font-size: 3rem;
+    padding: 0px 20px;
     margin-bottom: 30px;
-    margin-top: 10px;
+    padding: 0px 20px;
 }
 
 .answerList {
@@ -131,7 +130,9 @@ h2.lead {
     margin-right: 30px;
     margin-left: 30px;
     color: #fafafa;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    margin-left: 20px;
+    margin-right: 20px;
     line-height: 2.2;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -151,23 +152,23 @@ h2.lead {
 
 #correctedAnswer {
     color: #b00d0d;
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-transform: uppercase;
     margin-bottom: 50px;
 }
 
-#map {
-    padding-bottom: 20px;
-    padding-top: 20px;
+#map, img {
+    width: 80%;
     max-width: 100%;
     height: auto;
+    margin: 0px auto;
 }
 
+img,
 .mapsImg {
     max-width: 100%;
     height: auto;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
+    margin: 0px auto;
 }
 
 #mapCaption {
@@ -183,11 +184,10 @@ h2.lead {
     color: #fafafa;
     border: 1px solid #5e0808;
     font-size: 1.5rem;
-    font-size: 200%;
+     font-size: 1.5rem;
+     padding: 10px 30px;
+     margin-top: 40px;
     letter-spacing: 2px;
-    margin-left: 100px;
-    margin-right: 100px;
-    padding: 10px 10px;
     text-align: center;
 }
 

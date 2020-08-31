@@ -22,9 +22,8 @@ $(document).ready(function () {
     let correctAnswer;
     let incorrectAnswer;
     let unanswered;
-    let seconds;
-    let time;
     let answered;
+    let next;
     let userSelect;
     let messages = {
         correct: "'That's what I do. I drink and I know things'",
@@ -32,8 +31,6 @@ $(document).ready(function () {
         endTime: "'Nothing f*** s you harder than time'",
         finished: "When you play the game of thrones, you win or you die. You survived"
     };
-
-    const submitButton = document.getElementById('submit');
 
     //All questions inside an array of objects
     let triviaQuestions = [
@@ -162,6 +159,11 @@ $(document).ready(function () {
         newGame();
     });
 
+    $("#next").on("click", function () {
+        $(this).show();
+        newQuestion();
+    });
+
     //This captures the user's click on the reset button to create a new game
     $("#startOverBtn").on("click", function () {
         $(this).hide();
@@ -177,6 +179,8 @@ $(document).ready(function () {
         $("#unanswered").empty();
         $("#img").hide();
         $("#imgCaption").hide();
+        $('.buttons').hide();
+
         currentQuestion = 0;
         correctAnswer = 0;
         incorrectAnswer = 0;
@@ -186,13 +190,18 @@ $(document).ready(function () {
 
     //This function displays the next question
     function newQuestion() {
+
         $("#message").empty();
         $("#correctedAnswer").empty();
         $("#map").hide();
-        $("#mapCaption").hide();
+        $("#mapCaption").hide();;
         answered = true;
 
         //This function displays the new question
+        $("userSelect").on("click", function () {
+            $(this).hide();
+            newGame();
+        });
         $("#currentQuestion").html("Question " + (currentQuestion + 1) + " of " + triviaQuestions.length);
         $(".question").html(triviaQuestions[currentQuestion].question);
 
@@ -206,41 +215,11 @@ $(document).ready(function () {
             $(".answerList").append(choices);
         }
 
-        //This sets the timer
-        countdown();
-
-        //When user clicks on n answer this will pause the time and display the correct answer to the question 
+//When user clicks on an answer this will display the correct answer to the question 
         $(".thisChoice").on("click", function () {
             userSelect = $(this).data("index");
-            clearInterval(time);
             answerPage();
         });
-    }
-
-    //This function is for the timer countdown
-    function countdown() {
-        seconds = 15;
-        $("#timeLeft").html("00:" + seconds);
-        answered = true;
-        //Sets a delay of one second before the timer starts
-        time = setInterval(showCountdown, 1000);
-    }
-
-    //This function displays the countdown
-    function showCountdown() {
-        seconds--;
-
-        if (seconds < 10) {
-            $("#timeLeft").html("00:0" + seconds);
-        } else {
-            $("#timeLeft").html("00:" + seconds);
-        }
-
-        if (seconds < 1) {
-            clearInterval(time);
-            answered = false;
-            answerPage();
-        }
     }
 
     //This function takes the user to the answer page after the user selects an answer or timer runs out
@@ -250,9 +229,12 @@ $(document).ready(function () {
         $(".question").empty();
         $("#map").show();
         $("#mapCaption").show();
+        $(".buttons").show();
+
 
         let rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
         let rightAnswerIndex = triviaQuestions[currentQuestion].answer;
+        
 
         //This adds the map that corresponds to this quesiton
         let mapImageLink = triviaQuestions[currentQuestion].image;
@@ -273,6 +255,7 @@ $(document).ready(function () {
         if ((userSelect == rightAnswerIndex) && (answered === true)) {
             correctAnswer++;
             $('#message').html(messages.correct);
+            $("div .buttons").show();
         } else if ((userSelect != rightAnswerIndex) && (answered === true)) {
             incorrectAnswer++;
             $('#message').html(messages.incorrect);
@@ -283,20 +266,13 @@ $(document).ready(function () {
             $('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
             answered = true;
         }
-
-        if (currentQuestion == (triviaQuestions.length - 1)) {
-            setTimeout(scoreboard, 6000);
-        } else {
-            currentQuestion++;
-            setTimeout(newQuestion, 6000);
-        }
     }
 
     //This function displays all the game stats
     function scoreboard() {
-        $('#timeLeft').empty();
         $('#message').empty();
         $('#correctedAnswer').empty();
+        $('.buttons').hide();
         $('#map').hide();
         $("#mapCaption").hide();
 
@@ -308,4 +284,7 @@ $(document).ready(function () {
         $('#startOverBtn').show();
         $('#startOverBtn').html("PLAY AGAIN");
     }
+
+    showButtons();
+    scoreboard();
 });

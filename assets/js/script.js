@@ -14,9 +14,6 @@ GAME STRUCTURE:
 //IMPORTANT!
 $(document).ready(function () {
 
-    // GLOBAL letIABLES
-    // ================
-
     //Define all global letiables and objects
     let currentQuestion;
     let correctAnswer;
@@ -44,7 +41,7 @@ $(document).ready(function () {
                 "Charles VI of France",
                 "Ivan the Terrible"],
             answer: 1,
-            answerText: "Much like the Mad King, Aerys Targaryen, King Charles VI of France was popular, charming, and successful before he went mad. In his last days, The Mad King wanted to, 'burn them all'. Charles VI became convinced he was made of glass and insisted on wearing iron rods in his clothes to prevent anyone 'breaking' him."
+            answerText: "Much like the Mad King, Aerys Targaryen, King Charles VI of France was popular, charming, and successful before he went mad. In his last days, The Mad King wanted to, 'burn them all'. Charles VI became convinced he was made of glass and insisted on wearing iron rods in his clothes to prevent anyone from, 'breaking' him."
         },
 
         {
@@ -219,7 +216,7 @@ $(document).ready(function () {
 
     //This function is for the timer countdown
     function countdown() {
-        seconds = 15;
+        seconds = 30;
         $("#timeLeft").html("00:" + seconds);
         answered = true;
         //Sets a delay of one second before the timer starts
@@ -285,10 +282,10 @@ $(document).ready(function () {
         }
 
         if (currentQuestion == (triviaQuestions.length - 1)) {
-            setTimeout(scoreboard, 6000);
+            setTimeout(scoreboard, 30000);
         } else {
             currentQuestion++;
-            setTimeout(newQuestion, 6000);
+            setTimeout(newQuestion, 30000);
         }
     }
 

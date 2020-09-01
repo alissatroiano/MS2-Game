@@ -282,10 +282,10 @@ $(document).ready(function () {
         }
 
         if (currentQuestion == (triviaQuestions.length - 1)) {
-            setTimeout(scoreboard, 30000);
+            setTimeout(scoreboard, 20000);
         } else {
             currentQuestion++;
-            setTimeout(newQuestion, 30000);
+            setTimeout(newQuestion, 20000);
         }
     }
 
